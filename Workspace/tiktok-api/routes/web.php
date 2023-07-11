@@ -1,24 +1,25 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| Đây là nơi bạn có thể đăng ký các tuyến đường web cho ứng dụng của bạn. 
+| Các tuyến đường này được tải bởi RouteServiceProvider trong một nhóm chứa
+| middleware nhóm "web". Bây giờ hãy tạo ra một cái gì đó tuyệt vời!
 */
 
+Route::get('/', [UserController::class, 'index']);
 
-use Illuminate\Support\Facades\DB;
 
-Route::get('/', function () {
-    $users = DB::table('tbl_user')->select('username')->get();
-    return view('welcome', ['users' => $users]);
-});
+
+
+
+
 
 
 
