@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::select('username')->get();
-        return view('welcome', ['users' => $users]);
+        $user = User::first();
+        return view('welcome', ['user' => $user]);
     }
 }

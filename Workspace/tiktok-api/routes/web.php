@@ -12,8 +12,8 @@ use App\Http\Controllers\UserController;
 | Các tuyến đường này được tải bởi RouteServiceProvider trong một nhóm chứa
 | middleware nhóm "web". Bây giờ hãy tạo ra một cái gì đó tuyệt vời!
 */
-
 Route::get('/', [UserController::class, 'index']);
+
 
 
 
