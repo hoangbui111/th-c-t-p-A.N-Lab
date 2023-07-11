@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Http\Request;
+
 use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    protected $table = 'tbl_user';
-    protected $primaryKey = 'uid';
-    public $timestamps = false;
-
-    protected $fillable = ['fullname', 'username', 'password', 'gender', 'email', 'address'];
+    protected $fillable = [
+        'username', 'password', 'email', 'birthdate', 'avatar',
+    ];
+    
+    // Các phương thức và quan hệ trong model User
 }
