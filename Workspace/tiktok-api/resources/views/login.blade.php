@@ -21,10 +21,11 @@
             justify-content: center;
             align-items: center;
             margin-bottom: 20px;
+        }
         .avatar {
             max-width: 100px;
             margin-bottom: 20px;
-            border-radius; 50%;
+            border-radius: 50%;
             object-fit: cover;
         }
     </style>
@@ -33,6 +34,7 @@
     <div class="card">
         <img class="avatar" src="https://cdn-icons-png.flaticon.com/512/824/824727.png" alt="Avatar" required>
         <h1 class="text-center">Login</h1>
+
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -42,6 +44,12 @@
                 </ul>
             </div>
         @endif
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="form-group">

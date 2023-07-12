@@ -86,6 +86,10 @@
                 <input type="password" class="form-control" name="password" id="password" required>
             </div>
             <div class="form-group">
+                <label for="password_confirmation">Confirm Password:</label>
+                <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" required>
+            </div>
+            <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" class="form-control" name="email" id="email" required>
             </div>

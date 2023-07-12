@@ -16,7 +16,9 @@ Route::get('/register', [UserController::class, 'showRegistrationForm'])->name('
 Route::post('/register', [UserController::class, 'register']);
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [UserController::class, 'login']);
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+
+
 
 
 
