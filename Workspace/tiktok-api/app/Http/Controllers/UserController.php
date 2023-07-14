@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -23,6 +24,9 @@ class UserController extends Controller
             'email' => 'required|email|unique:users',
             'birthdate' => 'required|date',
             'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'address' => 'nullable',
+            'bio' => 'nullable',
+            'hobby' => 'nullable',
         ]);
 
         if ($validator->fails()) {
@@ -36,20 +40,19 @@ class UserController extends Controller
         } else {
             $avatarPath = null;
         }
-
         $user = User::create([
             'username' => $request->input('username'),
-            'password' => Hash::make($request->input('password')),
+            'password' => bcrypt($request->input('password')),
             'email' => $request->input('email'),
             'birthdate' => $request->input('birthdate'),
             'avatar' => $avatarPath,
-        ]);
-
-        return redirect('/login')->with('success', 'Đăng ký thành công! Vui lòng đăng nhập.');
-    }
-    
-
-
+            'address' => $request->input('address'),
+            'bio' => $request->input('bio'),
+        ]);   
+        
+            
+        return redirect()->route('login')->with('success', 'Đăng ký thành công. Vui lòng đăng nhập.');
+    }   
     public function showLoginForm()
     {
         return view('login');
@@ -60,11 +63,25 @@ class UserController extends Controller
         $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect('/dashboard')->with('success', 'Đăng nhập thành công!');
+            return redirect('/profile')->with('success', 'Đăng nhập thành công!');
         } else {
             return redirect('/login')->with('error', 'Tên đăng nhập hoặc mật khẩu không chính xác.');
         }
     }
 
     
+
+public function showProfile()
+{
+    // Lấy người dùng từ CSDL
+    $user = User::find(1); // Thay đổi 1 thành ID người dùng cần lấy thông tin
+
+    // Kiểm tra xem người dùng có tồn tại hay không
+    if (!$user) {
+        abort(404, "Người dùng không tồn tại");
+    }
+
+    // Truyền biến $user vào view profile.index
+    return view('profile.index', ['user' => $user]);
+}
 }

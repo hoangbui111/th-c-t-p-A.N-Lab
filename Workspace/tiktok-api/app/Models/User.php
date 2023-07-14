@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Authenticatable
 {
     protected $fillable = [
-        'username', 'password', 'email', 'birthdate', 'avatar',
+        'username', 'password', 'email', 'birthdate', 'avatar', 'bio', 'address', 'hobby'
     ];
 }
