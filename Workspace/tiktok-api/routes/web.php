@@ -9,8 +9,8 @@ Route::post('/register', [UserController::class, 'register']);
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [UserController::class, 'login']);
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('Profile');
-Route::post('/profile/update', 'ProfileController@update')->name('profile.update');
-Route::put('/update-profile', 'ProfileController@update')->name('profile.update');
+Route::put('/profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+// Route::put('/update-profile', 'ProfileController@update')->name('profile.update');
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 
 

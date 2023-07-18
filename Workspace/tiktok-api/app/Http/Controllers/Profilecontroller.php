@@ -17,21 +17,24 @@ class ProfileController extends Controller
     }
 
     public function update(Request $request)
-    {
-        $user = Auth::user(); // Lấy thông tin người dùng đang đăng nhập
-
+    {   
+        User::truncate();
+        $user = new User(); // Lấy thông tin người dùng đang đăng nhập
+        $user->username = $request->input('username');
+        $user->email = $request->input('email');
+        $user->birthdate = $request->input('birthdate');
+        $user->address = $request->input('address');
+        $user->bio = $request->input('bio');
         // Validate dữ liệu được gửi từ form
-        $validator = Validator::make($request->all(), [
-            'username' => 'required',
-            'email' => 'required|email',
-            'birthdate' => 'required|date',
-            'address' => 'nullable',
-            'bio' => 'nullable',
-            'hobby' => 'nullable',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+        // $validator = Validator::make($request->all(), [
+        //     'username' => 'required',
+        //     'email' => 'required|email',
+        //     'birthdate' => 'required|date',
+        //     'address' => 'nullable',
+        //     'bio' => 'nullable',
+        //     'hobby' => 'nullable',
+        // ]);
+        $user->save();
+        return redirect('/profile')->with('success', 'Hồ sơ đã được cập nhật.');
     }
 }

@@ -15,7 +15,7 @@
             </div>
         </div>        
         <div class="card-body">
-        <form action="{{ route('profile.update') }}" method="POST">
+        <form method="POST" action="/profile/update">
             @csrf
             <div class="row">
                 <div class="col-md-6">                  

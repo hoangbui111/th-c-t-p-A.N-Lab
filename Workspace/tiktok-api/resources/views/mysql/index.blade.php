@@ -13,4 +13,6 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 
 // Đóng kết nối đến cơ sở dữ liệu
 $connection = null;
+// sửa dữ liệu
+<a herf="profile.blade.php"idTiktok=<?php eho $username; ?>">Sửa</a>
 ?>
