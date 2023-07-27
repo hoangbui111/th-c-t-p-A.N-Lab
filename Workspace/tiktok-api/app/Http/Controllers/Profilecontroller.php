@@ -40,7 +40,7 @@ class ProfileController extends Controller
             return redirect('/profile')->withErrors($validator)->withInput();
         }
 
-      
+        
         $user->username = $request->input('username');
         $user->email = $request->input('email');
         $user->birthdate = $request->input('birthdate');

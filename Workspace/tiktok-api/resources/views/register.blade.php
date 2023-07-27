@@ -1,115 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .card {
-            max-width: 400px;
-            margin: auto;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-        .avatar-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        .file-upload {
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-        }
-        .file-upload input[type="file"] {
-            position: absolute;
-            left: 0;
-            top: 0;
-            opacity: 0;
-        }
-        .file-upload-label {
-            padding: 8px 12px;
-            background-color: #007bff;
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .file-upload-label:hover {
-            background-color: #0069d9;
-        }
-        .file-upload-text {
-            margin-left: 10px;
-        }
-        .form-control-error {
-            border-color: #dc3545;
-        }
-        .form-control-error::placeholder {
-            color: #dc3545;
-        }
-    </style>
+    @include('head')
 </head>
-<body>
-    <div class="card">
-        <div class="avatar-container">
-            <img class="avatar" src="https://cdn-icons-png.flaticon.com/512/824/824727.png" alt="Avatar" required>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="../../index2.html"><b>Đăng ký</b> TikTok</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Create your account</p>
+      @include('alert')
+      <form action="{{ route('register') }}" method="post">
+      <div class="input-group mb-3">
+          <input type="text" name="name" class="form-control" placeholder=" Name">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
         </div>
-        <h1 class="text-center">Sign Up</h1>
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+        <div class="input-group mb-3">
+          <input type="email" name="email" class="form-control" placeholder="Email">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
             </div>
-        @endif
-        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
-            @csrf
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" class="form-control" name="username" id="username" required>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" name="password" class="form-control" placeholder="Password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
             </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" class="form-control" name="password" id="password" required>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
             </div>
-            <div class="form-group">
-                <label for="password_confirmation">Confirm Password:</label>
-                <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" name="email" id="email" required>
-            </div>
-            <div class="form-group">
-                <label for="birthdate">Birthdate:</label>
-                <input type="date" class="form-control" name="birthdate" id="birthdate" required>
-            </div>
-            <div class="form-group">
-                <label for="avatar">Avatar:</label>
-                <div class="file-upload">
-                    <label class="file-upload-label">
-                        <input type="file" class="file-upload-input" name="avatar" id="avatar" required>
-                        <span class="file-upload-text">Choose File</span>
-                    </label>
-                </div>
-            </div>
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary">Sign Up</button>
-            </div>
-        </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <!-- Optional: Add any additional fields you want to include in the registration form -->
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+          </div>
+          <!-- /.col -->
+        </div>
+        @csrf
+      </form>
+      <p class="mt-2 mb-1">
+        <a href="{{ route('login') }}">Already have an account? Sign In</a>
+      </p>
     </div>
+  </div>
+</div>
+<!-- /.login-box -->
+@include('footer')
+
 </body>
 </html>
