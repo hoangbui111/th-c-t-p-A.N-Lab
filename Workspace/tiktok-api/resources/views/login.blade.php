@@ -3,10 +3,10 @@
 <head>
     @include('head')
 </head>
-<body clas  s="hold-transition login-page">
+<body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Đăng nhập</b> TikTok</a>
+    <a href="{{ route('home') }}"><b>Đăng nhập</b> TikTok</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -23,7 +23,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" name="password" class="form-control" placeholder="Password">
+          <input type="password" name="password" class="form-control" placeholder="Mật khẩu">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -41,7 +41,7 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
           </div>
           <!-- /.col -->
         </div>

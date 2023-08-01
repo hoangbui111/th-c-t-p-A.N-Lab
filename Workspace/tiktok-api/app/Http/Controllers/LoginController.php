@@ -18,23 +18,32 @@ class LoginController extends Controller
     }
    
    
+    
     public function login(Request $request)
     {
-        // Kiểm tra thông tin đăng nhập từ người dùng
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            // Kiểm tra quyền truy cập xem trang "Main"
-            if (Gate::allows('view', 'main')) {
-                // Nếu có quyền, chuyển hướng đến trang "Main"
+        // Xác thực người dùng
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            // Kiểm tra quyền truy cập vào trang phù hợp dựa vào vai trò
+            if (Gate::allows('view-admin-dashboard')) {
+                // Nếu có quyền admin, chuyển hướng đến trang 'main' cho admin
                 return redirect()->route('main');
+            } else if (Gate::allows('view-user-dashboard')) {
+                // Nếu có quyền người dùng thông thường, chuyển hướng đến trang 'user-dashboard' cho người dùng thông thường
+                return redirect()->route('user-dashboard');
             } else {
-                // Nếu không có quyền, hiển thị thông báo lỗi
-                return redirect()->route('login')->with('error', 'Bạn không có quyền truy cập vào trang "Main".');
+                // Nếu không có quyền, hiển thị thông báo lỗi hoặc chuyển hướng đến trang đăng nhập với thông báo lỗi
+                Auth::logout(); // Đăng xuất người dùng nếu không có quyền
+                return redirect()->route('login')->with('error', 'Bạn không có quyền truy cập vào trang phù hợp.');
             }
         } else {
             // Xác thực thất bại, hiển thị thông báo lỗi hoặc chuyển hướng đến trang đăng nhập với thông báo lỗi
             return redirect()->route('login')->with('error', 'Thông tin đăng nhập không đúng.');
         }
     }
-}
+} 
+   
+    
+    
+    
+    
+    

@@ -31,10 +31,11 @@ class RegisterController extends Controller
             'password' => bcrypt($request->input('password'))
         ]);
            // Đăng ký vai trò "admin" cho tài khoản mới tạo
-           $adminRole = Role::where('name', 'admin')->first();
-           if ($adminRole) {
-               $user->roles()->attach($adminRole);
-           }
+           if ($request->input('role') === 'admin') {
+            $user->role = 'admin';
+        } else {
+            $user->role = 'user';
+        }
    
         // Lưu thông tin tài khoản vào cơ sở dữ liệu
         $user->save();

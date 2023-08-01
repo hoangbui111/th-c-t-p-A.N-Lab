@@ -6,31 +6,3 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
-/* app.scss */
-.card {
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.card-img-top {
-    max-width: 100%;
-    height: auto;
-}
-
-.card-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-.card-text {
-    font-size: 1rem;
-    color: #666;
-}
-
-.container {
-    padding-top: 20px;
-}
