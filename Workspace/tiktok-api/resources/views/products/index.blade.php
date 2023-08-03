@@ -1,29 +1,47 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h1>Danh sách sản phẩm</h1>
-        <!-- Form tìm kiếm -->
-        <form action="{{ route('products.search') }}" method="GET">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Nhập tên sản phẩm để tìm kiếm" name="q">
-                <button class="btn btn-primary" type="submit">Tìm kiếm</button>
-            </div>
-        </form>
-
+<div class="main-content">
+    <div class="container-fluid">
+        <h3 class="page-title">{{__('Products')}}</h3>
         <div class="row">
-            @foreach($products as $product)
-                <div class="col-md-4">      
-                    <h3>{{ $product->name }}</h3>
-                    <p>{{ $product->description }}</p>
-                    <p>Giá: {{ $product->price }} đ</p>
-                    <p>Số lượng: {{ $product->quantity }}</p>
-                    <!-- Hiển thị hình ảnh sản phẩm -->
-                    @if($product->image)
-                        <img src="{{ asset('path/to/your/image/folder/'.$product->image) }}" alt="{{ $product->name }}" style="max-width: 100px;">
-                    @endif
+            <div class="panel">
+                <div class="panel-body">
+                    @include('layouts.message')
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered nowrap" id="table" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Image</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($products as $key=>$values)
+                                        <tr>
+                                            <td>{{ $values->name }}</td>
+                                            <td><img src="{{ asset('public/storage/products/'.$values->image) }}" width="70px"></td>
+                                            <td>
+                                                <a href="{{ route('products.edit', $values->id) }}"><span class='btn btn-sm btn-info'> Edit</span></a>
+                                                <div style="height: 5px;"></div>
+                                                <form action="{{ route('products.destroy', $values->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" onclick="return confirm('Do you really want to delete products!')" class="btn btn-sm btn-danger">Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            {{ $products->links() }}
+                        </div>
+                    </div>
                 </div>
-            @endforeach
+            </div>
         </div>
     </div>
+</div>
 @endsection

@@ -1,24 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>User Dashboard</title>
-</head>
-<body>
-    <h1>Welcome, {{ $user->name }}!</h1>
-    <p>Email: {{ $user->email }}</p>
+@extends('layouts.user')
 
-    <!-- Hiển thị các thông tin cá nhân khác của người dùng -->
-
-    <h2>Orders</h2>
-    <ul>
-        @foreach($user->orders as $order)
-            <li>Order ID: {{ $order->id }}, Total: {{ $order->total }}</li>
-        @endforeach
-    </ul>
-
-    <!-- Hiển thị danh sách các đơn hàng của người dùng -->
-
-    <!-- Hiển thị các sản phẩm đã mua của người dùng -->
-
-</body>
-</html>
+@section('content')
+    <div class="container">
+        <h1>Welcome, {{ auth()->user()->name }}</h1>
+        
+        <!-- Hiển thị danh sách sản phẩm hoặc thông tin cá nhân -->
+        <div class="card">
+            <div class="card-body">
+                <h2>Your Dashboard</h2>
+                
+                <!-- Nếu bạn muốn hiển thị danh sách sản phẩm -->
+                <h3>Your Products</h3>
+                <ul>
+                    @foreach ($user->products as $product)
+                        <li>{{ $product->name }}</li>
+                    @endforeach
+                </ul>
+                
+                <!-- Nếu bạn muốn cho phép người dùng chỉnh sửa thông tin cá nhân -->
+                <a href="{{ route('user.profile') }}">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+@endsection

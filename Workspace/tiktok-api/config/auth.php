@@ -41,6 +41,11 @@ return [
             'provider' => 'users',
         ],
     ],
+    'admin' => [ // Thêm guard cho vai trò admin
+        'driver' => 'session',
+        'provider' => 'admins', // Đổi thành provider tương ứng cho admin
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

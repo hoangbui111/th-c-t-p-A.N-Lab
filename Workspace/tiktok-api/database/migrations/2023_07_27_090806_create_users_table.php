@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->boolean('is_admin')->nullable()->comment('1 - Admin'); //added
+            $table->enum('role', ['user', 'admin'])->default('user');   
         });
     }
 

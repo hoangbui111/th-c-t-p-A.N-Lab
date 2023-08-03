@@ -14,7 +14,7 @@
       <p class="login-box-msg">Create your account</p>
       @include('alert')
       <form action="{{ route('register') }}" method="post">
-      <div class="input-group mb-3">
+        <div class="input-group mb-3">
           <input type="text" name="name" class="form-control" placeholder=" Name">
           <div class="input-group-append">
             <div class="input-group-text">
@@ -45,6 +45,13 @@
               <span class="fas fa-lock"></span>
             </div>
           </div>
+        </div>
+        <div class="input-group mb-3">
+          <label for="role">Role:</label>
+          <select name="role" class="form-control">
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+          </select>
         </div>
         <div class="row">
           <div class="col-8">

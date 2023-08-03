@@ -1,37 +1,26 @@
 <?php
-
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\MainController;
-use App\Http\Controllers\MenuController;
-use App\Http\Controllers\ProductController;
-
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
-Route::get('login', [LoginController::class, 'index'])->name('login');  
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login'); // Chỉ thay đổi tên phương thức
 Route::post('/login', [LoginController::class, 'login']);
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->middleware('auth');
-Route::get('/main', [MainController::class, 'index'])->name('main');
-Route::get('/', function () {
-    return view('index');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+
+Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function () {
+    Route::get('/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
+    Route::get('/manage_users', [AdminController::class, 'manageUsers'])->name('admin.manage_users');
 });
 
-Auth::routes();
-
-Route::get('home', [DashboardController::class, 'index'])->name('home'); 
-Route::group(['middleware' => ['admin']], function () {
-   Route::get('product', [DashboardController::class, 'products'])->name('product.index');
+Route::group(['middleware' => 'auth', 'prefix' => 'user'], function () {
+    Route::get('/dashboard', [UserController::class, 'userDashboard'])->name('user.dashboard');
+    Route::get('/user/edit-profile', 'UserController@editProfile')->name('user.edit_profile');
+    Route::post('/user/update-profile', 'UserController@updateProfile')->name('user.update_profile');    
 });
-#Menu
-Route::get('add', [MenuController::class, 'create'])->name('menus.add');
-Route::post('add', [MenuController::class, 'store'])->name('menus.store');
-Route::get('list', [MenuController::class, 'index'])->name('menus.list');              
-Route::get('/menus/edit/{id}', [MenuController::class, 'show'])->name('menus.show');
-Route::post('/menus/edit/{id}', [MenuController::class, 'update'])->name('menus.update');
-Route::delete('/menus/destroy{id}', [MenuController::class, 'destroy'])->name('menus.destroy');
