@@ -6,7 +6,7 @@ use App\Http\Requests\CreateFormRequest;
 
 use App\Http\Services\MenuService;
 use App\Models\Menu;
-
+use Illuminate\Support\Facades\Auth;
 class MenuController extends Controller
 {
     protected $menuService;
@@ -18,8 +18,8 @@ class MenuController extends Controller
 
     public function create() 
     {
-        return view('add', [
-            'title'=> 'Thêm Danh Mục Mới',
+        return view('menu.add', [
+            'title'=> 'Thêm Sản Phẩm Mới',
             'menus'=> $this->menuService->getParent()
         ]);
     }
@@ -29,16 +29,16 @@ class MenuController extends Controller
         $result = $this->menuService->create($request);
 
         if ($result) {
-            return redirect()->route('menus.list')->with('success', 'Tạo danh mục thành công');
+            return redirect()->route('menus.list')->with('success', 'Tạo Sản Phẩm thành công');
         }
 
-        return redirect()->back()->with('error', 'Có lỗi khi tạo danh mục');
+        return redirect()->back()->with('error', 'Có lỗi khi tạo Sản phẩm');
     }
 
 
     public function index() {
         return view('list', [
-            'title' => 'Danh Sách Danh Mục Mới Nhất',
+            'title' => 'Danh Sách Sản phẩm Mới Nhất',
             'menus' => $this->menuService->getAll()
         ]);
     }
@@ -48,31 +48,31 @@ class MenuController extends Controller
         $menu = Menu::find($menuId);
     
         if (!$menu) {
-            return redirect()->route('menus.list')->with('error', 'Không tìm thấy danh mục');
+            return redirect()->route('menus.list')->with('error', 'Không tìm thấy Sản phẩm');
         }
     
         return view('show', [
-            'title' => 'Chỉnh sửa danh mục: ' . $menu->name,
+            'title' => 'Chỉnh sửa Sản Phẩm: ' . $menu->name,
             'menu' => $menu,
             'menus' => $this->menuService->getParent()
         ]);
     }
     
-    public function update(CreateFormRequest $request, $menuId) 
+    public function update(CreateFormRequest $request, $menuId)
     {
         $menu = Menu::find($menuId);
     
         if (!$menu) {
-            return redirect()->route('menus.list')->with('error', 'Không tìm thấy danh mục');
+            return redirect()->route('menus.list')->with('error', 'Không tìm thấy Sản Phấm');
         }
     
         $result = $this->menuService->update($request, $menu);
     
         if ($result) {
-            return redirect()->route('menus.list')->with('success', 'Cập nhật danh mục thành công');
+            return redirect()->route('menus.list')->with('success', 'Cập nhật Sản Phẩm thành công');
         }
     
-        return redirect()->back()->with('error', 'Có lỗi khi cập nhật danh mục');
+        return redirect()->back()->with('error', 'Có lỗi khi cập nhật Sản phẩm');
     }
   
     
@@ -83,7 +83,7 @@ class MenuController extends Controller
         if ($result) {
             return response()->json([
                 'error' => false,
-                'message' => 'Xóa thành công danh mục'
+                'message' => 'Xóa thành công Sản Phẩm'
             ]);
         }  
 

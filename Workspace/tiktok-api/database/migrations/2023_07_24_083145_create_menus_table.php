@@ -16,10 +16,11 @@ return new class extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
             $table->string('name', length:255);
-            $table->integer('parent_id');
+            $table->integer('menu_id');
             $table->text('description');
             $table->longtext('content');
-            $table->string ('slug', length:255)->unique();
+            $table->integer('price');
+            $table->integer('price_sale');
             $table->integer('active');
             $table->timestamps();
         });

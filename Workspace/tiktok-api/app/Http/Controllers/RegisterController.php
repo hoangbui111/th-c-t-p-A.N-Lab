@@ -28,10 +28,9 @@ class RegisterController extends Controller
         $user = new User([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            $password = Hash::make($request->input('password')), // Thêm dấu phẩy sau bcrypt
+            'password' => Hash::make($request->input('password')), // Sử dụng Hash::make() để băm mật khẩu
             'role' => $request->role,
         ]);
-
         // Lưu thông tin tài khoản vào cơ sở dữ liệu    
         $user->save();
 

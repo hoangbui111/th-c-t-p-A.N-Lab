@@ -1,5 +1,5 @@
 <?php
-#database/seeds/DatabaseSeeder.php
+
 
 namespace Database\Seeders;
 use Illuminate\Database\Seeder;
@@ -11,8 +11,12 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+  // DatabaseSeeder.php
     public function run()
-    {
-        \App\Models\Posts::factory()->create(); //Added
-    }
+{
+    $this->call([
+        RoleSeeder::class,
+        // other seeders
+    ]);
+}
 }

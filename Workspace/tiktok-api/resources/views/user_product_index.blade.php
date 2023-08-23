@@ -1,5 +1,10 @@
 @extends('main')
 
+@section('head')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/template/admin/js/main.js"></script>
+@endsection
+
 @section('content')
 
     <table class='table'>
@@ -13,7 +18,8 @@
             </tr>
         </thead>
         <tbody>
-            {!! \App\Helpers\Helpers::menu($menus) !!}       
+            {!! \App\Helpers\Helper::product($products) !!}       
         </tbody>
     </table>
+
 @endsection

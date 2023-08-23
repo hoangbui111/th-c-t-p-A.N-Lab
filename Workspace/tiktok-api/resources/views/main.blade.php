@@ -43,9 +43,8 @@
             <!-- jquery validation -->
             <div class="card card-primary mt-3">
               <div class="card-header">
-                <h3 class="card-title">{{ $title }}</h3>
               </div>
-              
+            
 
               @yield('content')
             </div>
@@ -64,39 +63,4 @@
     <!-- /.content -->
   </div>
 
-  @include('sidebar')
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.2.0
-    </div>
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
-
-@include('footer')
-</body>
-</html>
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}  
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
   
